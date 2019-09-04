@@ -20,3 +20,17 @@ after_success:
   - docker push courtvision/multi-nginx
   - docker push courtvision/multi-server
   - docker push courtvision/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-central-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-eu-central-1-670227981664
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
